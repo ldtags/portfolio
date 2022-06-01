@@ -6,9 +6,8 @@
 body, html {
     font-family: 'Courier New', Courier, monospace;
     overflow-x: hidden;
-    overflow-y: hidden;
     overscroll-behavior: none;
-    background-color: #ffffff;
+    background-color: #6e7e94;
     width: 100%;
     height: 100%;
     margin: 0;
@@ -19,6 +18,7 @@ header {
     display: block;
 }
 
+
 li {
     display: list-item;
     text-align: -webkit-match-parent;
@@ -28,87 +28,39 @@ li {
 /* ---------- HEADER ---------- */
 
 .header {
-    display: table;
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
-    max-height: 500px;
+    max-height: 50px;
+    background-color: #454749;
     color: #ffffff;
-    flex-shrink: 0;
     z-index: 1000;
 }
 
-.header::before {
-    background: #377ecd url(https://images.unsplash.com/photo-1495312040802-a929cd14a6ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8&w=1000&q=80) no-repeat center center/cover;
-    max-height: 500px;
-    position: absolute;
-}
-
-.header::after {
-    background: linear-gradient(135deg, transparent 0%, #53c161 75%);
-    opacity: .35;
-    position: absolute;
-}
-
-.header::before, 
-.header::after {
-    content: "";
-    display: block;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: -1;
-}
-
-.header-card {
-    display: table-cell;
-    height: 100%;
-    overflow: hidden;
-    vertical-align: middle;
-    width: 50%;
-}
-
-.left-header {
-    text-align: right;
-}
-
-.left-header-content {
-    text-align: center;
-    margin-right: 2em;
-    display: inline-block;
-    padding: 2.25em 3em;
-}
-
-.right-header {
-    text-align: left;
-}
-
-.right-header-content {
-    display: inline-block;
-    padding: 2.25em 3em;
-}
-
-.left-header img {
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-}
-
 .nav-list {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
     margin: 0 auto;
     padding: 0;
     overflow: hidden;
+    list-style-type: none;
+    flex-wrap: wrap;
+    width: 40%;
 }
 
 ul.nav-list li {
-    width: auto;
+    height: 35px;
+    width: fit-content;
     font-size: 17.5px;
     cursor: pointer;
-    padding: 5px;
+    word-wrap: break-word;
+    padding: 15px 15px 0;
 }
 
 ul.nav-list li:hover{
-    margin-left: 7px;
+    margin-top: -3px;
+    margin-bottom: 3px;
 }
 
 
@@ -121,6 +73,74 @@ ul.nav-list li:hover{
 
 /* ---------- BODY ---------- */
 
+.sunset {
+    display: flex;
+    background-image: url(https://kwa.ng/static/4922c522dbd60d5f4a14cbd0e0b48f95/fb329/confidence-gap-adam-eastburn.jpg);
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
 
+.sunset-content {
+    font-size: 30px;
+}
+
+.about-me {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-height: 750px;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-me-content {
+    display: flex;
+    height: 100%;
+    width: 50%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-me-profile {
+    padding: 20px;
+    text-align: center;
+}
+
+.about-me-image {
+    border-radius: 50%;
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.about-me-text {
+    text-align: right;
+    padding: 50px;
+}
+
+.sub-intro {
+    text-align: center;
+    font-size: 27px;
+    width: 50%;
+}
 
 /* ---------- BODY ---------- */
+
+
+/* ---------- FOOTER ---------- */
+
+
+
+.footer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-height: 200px;
+    background-color: #051622;
+}
+
+
+
+/* ---------- FOOTER ---------- */

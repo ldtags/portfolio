@@ -63,6 +63,27 @@ ul.nav-list li:hover{
     margin-bottom: 3px;
 }
 
+li.dropdown {
+    display: inline-block;
+}
+
+.project-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(25, 39, 53);opacity:0.8;
+    margin-top: 5px;
+    padding: 12px 16px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown:hover .project-dropdown-content {
+    display: block;
+}
+
+.project-dropdown-item:hover {
+    background-color: rgb(79, 107, 134);opacity:0.8;
+    color: #ffffff;
+}
 
 /* ---------- HEADER ---------- */
 

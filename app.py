@@ -7,6 +7,10 @@ app.secret_key = "27eduCBA09"
 def main():
     return render_template("index.html")
 
+@app.route('/btree')
+def btree():
+    return render_template("btree.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

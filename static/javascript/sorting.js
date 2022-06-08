@@ -36,7 +36,7 @@ async function selectionSort(delay = 300) {
             await new Promise((resolve) =>
                 setTimeout(() => {
                     resolve();
-                }, 300)
+                }, 30)
             );
 
             var val1 = parseInt(bars[j].childNodes[0].innerHTML);
@@ -64,7 +64,7 @@ async function selectionSort(delay = 300) {
         await new Promise((resolve) =>
             setTimeout(() => {
                 resolve();
-            }, 300)
+            }, 30)
         );
 
         // Provide skyblue color to the (min-idx)th bar

@@ -4,11 +4,11 @@
     {% include "format/header.html" %}
 
     <body>
-        <div class="sorting-container"></div>
+        <div class="sorting-container" id="sorting-container"></div>
 
         <div class="input-container">
             <div class="sort-inputs">
-                <button class="sort-btn" onclick="generateArray()" id="new-array-btn">Generate New Array</button>
+                <button class="sort-btn" onclick="generateBars()" id="new-array-btn">Generate New Array</button>
                 <select name="sort-list" id="sort-list" size="4" multiple="multiple">
                     <option value="merge" onclick="setMerge()"> Merge Sort </option>
                     <option value="insertion" onclick="setInsertion()"> Insertion Sort </option>

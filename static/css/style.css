@@ -246,9 +246,11 @@ li.dropdown {
 
 .sorting-container {
     width: 600px;
-    height: 384px;
+    height: 386px;
     position: relative;
     margin: 0 auto;
+    margin-top: 10em;
+    background-color: #ababab;
 }
 
 .bar {
@@ -260,7 +262,7 @@ li.dropdown {
     transition: 0.2s all ease;
 }
 
-.bar__id {
+.bar_id {
     position: absolute;
     top: -24px;
     width: 100%;
@@ -279,7 +281,9 @@ li.dropdown {
 
 .input-container {
     position: relative;
-    
+    width: 600px;
+    background-color: #454749;
+    margin: 0 auto;
 }
 
 .sort-inputs {

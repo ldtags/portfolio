@@ -11,6 +11,10 @@ def main():
 def btree():
     return render_template("btree.html")
 
+@app.route('/sorting')
+def sorting():
+    return render_template("sorting.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

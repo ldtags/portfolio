@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <script src="../static/javascript/sorting.js"></script>
+    {% include "format/header.html" %}
+
+    <body>
+        <div class="sorting-container"></div>
+
+        <div class="input-container">
+            <div class="sort-inputs">
+                <button class="sort-btn" onclick="generateArray()" id="new-array-btn">Generate New Array</button>
+                <select name="sort-list" id="sort-list" size="4" multiple="multiple">
+                    <option value="merge" onclick="setMerge()"> Merge Sort </option>
+                    <option value="insertion" onclick="setInsertion()"> Insertion Sort </option>
+                    <option value="quick" onclick="setQuick()"> Quicksort </option>
+                    <option value="selection" onclick="setSelection()"> Selection Sort </option>
+                </select>
+                <button class="sort-btn" onclick="sortArray(),disable()" id="sort-btn">Sort Array</button>
+            </div>
+        </div>
+    </body>
+</html>

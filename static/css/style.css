@@ -18,10 +18,23 @@ header {
     display: block;
 }
 
+ul {
+    list-style: none;
+    padding-left: 0;
+}
 
 li {
     display: list-item;
     text-align: -webkit-match-parent;
+}
+
+div {
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 
@@ -49,22 +62,23 @@ li {
     width: 40%;
 }
 
-ul.nav-list li {
+ul.nav-list li:not(.project-dropdown-content li) {
     height: 35px;
     width: fit-content;
     font-size: 17.5px;
-    cursor: pointer;
     word-wrap: break-word;
     padding: 15px 15px 0;
 }
 
-ul.nav-list li:hover{
+ul.nav-list li:not(:last-child):not(.project-dropdown-content li):hover {
     margin-top: -3px;
     margin-bottom: 3px;
+    cursor: pointer;
 }
 
 li.dropdown {
     display: inline-block;
+    cursor: default;
 }
 
 .project-dropdown-content {
@@ -72,12 +86,26 @@ li.dropdown {
     position: absolute;
     background-color: rgb(25, 39, 53);opacity:0.8;
     margin-top: 5px;
-    padding: 12px 16px;
+    padding-right: 10px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .dropdown:hover .project-dropdown-content {
     display: block;
+}
+
+.project-dropdown-content li {
+    padding: 0;
+}
+
+.project-dropdown-item {
+    margin: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 15px 5px 15px 5px;
 }
 
 .project-dropdown-item:hover {
@@ -186,4 +214,85 @@ li.dropdown {
     cursor: pointer;
 }
 
+.footer-content .email-btn:active {
+    color: #ababab;
+}
+
 /* ---------- FOOTER ---------- */
+
+
+
+/* ---------- BTREE ---------- */
+
+.btree-content {
+    margin-top: 50px;
+    background-color: #ffffff;
+}
+
+.btree-inputs {
+    justify-content: center;
+    align-items: center;
+}
+
+.btree-content .input {
+    background-color: #6e7e94;
+}
+
+/* ---------- BTREE ---------- */
+
+
+
+/* ---------- SORTING ---------- */
+
+.sorting-container {
+    width: 600px;
+    height: 384px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.bar {
+    width: 28px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgb(0, 183, 255);
+    transition: 0.2s all ease;
+}
+
+.bar__id {
+    position: absolute;
+    top: -24px;
+    width: 100%;
+    text-align: center;
+}
+
+.sort-btn {
+    padding: 12px;
+    font-weight: bolder;
+    background-color: #6f459e;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    border: white;
+}
+
+.input-container {
+    position: relative;
+    
+}
+
+.sort-inputs {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 450px;
+    margin: auto;
+}
+
+.sort-inputs:not(.sort-label) {
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/* ---------- SORTING ---------- */

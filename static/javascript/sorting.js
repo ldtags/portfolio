@@ -1,10 +1,14 @@
-let sortAlgo = "selection";
+let sortAlgo = '';
 let ARR_SIZE = 20;
-let ARR = [];
-const container = document.getElementById("sorting-container");
+let ANIMATION_SPEED = 30;
+
+window.onload = setTimeout(() => {
+                    generateBars();
+                }, 50);
 
 
 function generateBars(num = ARR_SIZE) {
+    clearBars();
     for(let i = 0; i < num; i++) {
         const value = Math.floor(Math.random() * (ARR_SIZE * 5)) + 1;
         const container = document.getElementById("sorting-container");
@@ -21,54 +25,80 @@ function generateBars(num = ARR_SIZE) {
     }
 }
 
-async function selectionSort(delay = 300) {
+
+function swap(arr, ind1, ind2) {
+    //Creates the temp values for swapping
+    let tempHeight = arr[ind1].style.height;
+    let tempVal = arr[ind1].childNodes[0].innerText;
+
+    //loads ind1 with data from ind2
+    arr[ind1].style.height = arr[ind2].style.height;
+    arr[ind1].childNodes[0].innerText = arr[ind2].childNodes[0].innerText;
+
+    arr[ind2].style.height = tempHeight;
+    arr[ind2].childNodes[0].innerText = tempVal;
+}
+
+async function insertionSort() {
+    let bars = document.querySelectorAll(".bar");
+    let key, j;
+    for(let i = 0; i < bars.length; i++) {
+        key = bars[i].childNodes[0].innerHTML;
+        bars[i].style.backgroundColor = "darkblue";
+        
+        j = i - 1;
+
+        while(j >= 0 && bars[j].childNodes[0].innerHTML > key) {
+            bars[j+1].childNodes[0].innerHTML = bars[j].childNodes[0].innerHTML;
+            j = j-1;
+        }
+        arr[j+1] = key;
+    }
+
+}
+
+
+async function selectionSort() {
     let bars = document.querySelectorAll(".bar");
 
-    var min_idx = 0;
+    var min = 0;
     for(let i = 0; i < bars.length; i++) {
-        mid_idx = i;
-        bars[i].style.backgroundColor = "darkblue"
+        min = i;
+        bars[i].style.backgroundColor = "darkBlue";
 
-        for(let j = i + 1; j < bars.length; j++) {
-
+        for(let j = i+1; j < bars.length; j++) {
             bars[j].style.backgroundColor = "red";
-            // To pause the execution of code for 300 milliseconds
+            // To pause the execution of code
             await new Promise((resolve) =>
                 setTimeout(() => {
                     resolve();
-                }, 30)
+                }, ANIMATION_SPEED)
             );
 
-            var val1 = parseInt(bars[j].childNodes[0].innerHTML);
-            var val2 = parseInt(bars[min_idx].childNodes[0].innerHTML);
+            let minVal = parseInt(bars[min].childNodes[0].innerHTML);
+            let temp = parseInt(bars[j].childNodes[0].innerHTML);
 
-            if(val1 < val2) {
-                if(min_idx !== i) {
-                    bars[min_idx].style.backgroundColor = "  rgb(24, 190, 255)";
+            if(temp < minVal) {
+                if(min !== i) {
+                    bars[min].style.backgroundColor = "  rgb(24, 190, 255)";
                 }
-                min_idx = j;
-            } else {
+                min = j;
+            }  else {
                 bars[j].style.backgroundColor = "  rgb(24, 190, 255)";
             }
         }
 
-        // To swap ith and (min_idx)th bar
-        var temp1 = bars[min_idx].style.height;
-        var temp2 = bars[min_idx].childNodes[0].innerText;
-        bars[min_idx].style.height = bars[i].style.height;
-        bars[i].style.height = temp1;
-        bars[min_idx].childNodes[0].innerText = bars[i].childNodes[0].innerText;
-        bars[i].childNodes[0].innerText = temp2;
-
-        // To pause the execution of code for 300 milliseconds
+        //swaps the values (if no lower values are found, nothing needs to be swapped)
+        if(min != i) {swap(bars, min, i);}
+        // To pause the execution of code
         await new Promise((resolve) =>
             setTimeout(() => {
                 resolve();
-            }, 30)
+            }, ANIMATION_SPEED)
         );
 
         // Provide skyblue color to the (min-idx)th bar
-        bars[min_idx].style.backgroundColor = "  rgb(24, 190, 255)";
+        bars[min].style.backgroundColor = "  rgb(24, 190, 255)";
     
         // Provide lightgreen color to the ith bar
         bars[i].style.backgroundColor = " rgb(49, 226, 13)";
@@ -84,7 +114,10 @@ async function selectionSort(delay = 300) {
 }
 
 function clearBars() {
-    
+    let bars = document.querySelectorAll(".bar");
+    for(let i = 0; i < bars.length; i++) {
+        bars[i].parentNode.removeChild(bars[i]);
+    }
 }
 
 
@@ -92,15 +125,19 @@ function sortArray() {
     switch(sortAlgo) {
         case "merge":
             mergeSort();
+            disable();
             break;
         case "insertion":
             insertionSort();
+            disable();
             break;
         case "quick":
             quicksort();
+            disable();
             break;
         case "selection":
             selectionSort();
+            disable();
             break;
         default:
             alert("Please select a sorting algorithm");
@@ -129,8 +166,8 @@ function setSize(size) {
     ARR_SIZE = size;
 }
 
-function generate() {
-    window.location.reload();
+function setSpeed(milliseconds) {
+    ANIMATION_SPEED = milliseconds;
 }
 
 function disable() {

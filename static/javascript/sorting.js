@@ -42,19 +42,29 @@ function swap(arr, ind1, ind2) {
 async function insertionSort() {
     let bars = document.querySelectorAll(".bar");
     let key, j;
-    for(let i = 0; i < bars.length; i++) {
+    for(let i = 1; i < bars.length; i++) {
         key = bars[i].childNodes[0].innerHTML;
-        bars[i].style.backgroundColor = "darkblue";
-        
+        // bars[i].style.backgroundColor = "darkblue";
         j = i - 1;
 
         while(j >= 0 && bars[j].childNodes[0].innerHTML > key) {
-            bars[j+1].childNodes[0].innerHTML = bars[j].childNodes[0].innerHTML;
-            j = j-1;
-        }
-        arr[j+1] = key;
-    }
+            if(j !== i) {
+                // bars[j].style.backgroundColor = "red";
+            }
+            // To pause the execution of code
+            await new Promise((resolve) =>
+                setTimeout(() => {
+                    resolve();
+                }, ANIMATION_SPEED)
+            );
 
+            swap(bars, j, j+1);
+
+            j = j - 1;
+        }
+        bars[j+1].childNodes[0].innerHTML = key;
+    }
+    enable();
 }
 
 
@@ -104,13 +114,7 @@ async function selectionSort() {
         bars[i].style.backgroundColor = " rgb(49, 226, 13)";
     }
 
-    // To enable the button "Generate New Array" after final(sorted)
-    document.getElementById("new-array-btn").disabled = false;
-    document.getElementById("new-array-btn").style.backgroundColor = "#6f459e";
-    
-    // To enable the button "Selection Sort" after final(sorted)
-    document.getElementById("sort-btn").disabled = false;
-    document.getElementById("sort-btn").style.backgroundColor = "#6f459e";
+    enable();
 }
 
 function clearBars() {
@@ -145,6 +149,25 @@ function sortArray() {
     }
 }
 
+function disable() {
+  // To disable the button "Generate New Array"
+  document.getElementById("new-array-btn").disabled = true;
+  document.getElementById("new-array-btn").style.backgroundColor = "#d8b6ff";
+  
+  // To disable the button "Selection Sort"
+  document.getElementById("sort-btn").disabled = true;
+  document.getElementById("sort-btn").style.backgroundColor = "#d8b6ff";
+}
+
+function enable() {
+    // To enable the button "Generate New Array" after final(sorted)
+    document.getElementById("new-array-btn").disabled = false;
+    document.getElementById("new-array-btn").style.backgroundColor = "#6f459e";
+    
+    // To enable the button "Selection Sort" after final(sorted)
+    document.getElementById("sort-btn").disabled = false;
+    document.getElementById("sort-btn").style.backgroundColor = "#6f459e";
+}
 
 function setMerge() {
     sortAlgo = "merge";
@@ -170,12 +193,10 @@ function setSpeed(milliseconds) {
     ANIMATION_SPEED = milliseconds;
 }
 
-function disable() {
-  // To disable the button "Generate New Array"
-  document.getElementById("new-array-btn").disabled = true;
-  document.getElementById("new-array-btn").style.backgroundColor = "#d8b6ff";
-  
-  // To disable the button "Selection Sort"
-  document.getElementById("sort-btn").disabled = true;
-  document.getElementById("sort-btn").style.backgroundColor = "#d8b6ff";
-}
+function printArray(arr) { 
+    let toPrint = "";
+    let i; 
+    for (i = 0; i < arr.length; i++) 
+        toPrint += arr[i].childNodes[0].innerHTML + " ";
+    alert(toPrint);
+} 

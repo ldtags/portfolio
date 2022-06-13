@@ -6,51 +6,14 @@ window.onload = setTimeout(() => {
                     generateBars();
                 }, 50);
 
-
-function generateBars(num = ARR_SIZE) {
-    clearBars();
-    for(let i = 0; i < num; i++) {
-        const value = Math.floor(Math.random() * (ARR_SIZE * 5)) + 1;
-        const container = document.getElementById("sorting-container");
-
-        const bar = document.createElement("div");
-        bar.classList.add("bar");
-        bar.style.height = (value * 3) + 'px';
-        bar.style.transform = 'translateX(' + (i * 30) + 'px)';
-        const barLabel = document.createElement("label");
-        barLabel.classList.add("bar_id");
-        barLabel.innerHTML = value;
-        bar.appendChild(barLabel);
-        container.appendChild(bar);
-    }
-}
-
-
-function swap(arr, ind1, ind2) {
-    //Creates the temp values for swapping
-    let tempHeight = arr[ind1].style.height;
-    let tempVal = arr[ind1].childNodes[0].innerText;
-
-    //loads ind1 with data from ind2
-    arr[ind1].style.height = arr[ind2].style.height;
-    arr[ind1].childNodes[0].innerText = arr[ind2].childNodes[0].innerText;
-
-    arr[ind2].style.height = tempHeight;
-    arr[ind2].childNodes[0].innerText = tempVal;
-}
-
 async function insertionSort() {
     let bars = document.querySelectorAll(".bar");
     let key, j;
-    for(let i = 1; i < bars.length; i++) {
-        key = bars[i].childNodes[0].innerHTML;
-        // bars[i].style.backgroundColor = "darkblue";
+    for(let i = 0; i < bars.length; i++) {
+        key = parseInt(bars[i].childNodes[0].innerHTML);
+        bars[i].style.backgroundColor = "darkBlue";
         j = i - 1;
-
-        while(j >= 0 && bars[j].childNodes[0].innerHTML > key) {
-            if(j !== i) {
-                // bars[j].style.backgroundColor = "red";
-            }
+        while(j >= 0 && parseInt(bars[j].childNodes[0].innerHTML) > key) {
             // To pause the execution of code
             await new Promise((resolve) =>
                 setTimeout(() => {
@@ -63,6 +26,7 @@ async function insertionSort() {
             j = j - 1;
         }
         bars[j+1].childNodes[0].innerHTML = key;
+        bars[j+1].style.backgroundColor = " rgb(49, 226, 13)";
     }
     enable();
 }
@@ -113,8 +77,42 @@ async function selectionSort() {
         // Provide lightgreen color to the ith bar
         bars[i].style.backgroundColor = " rgb(49, 226, 13)";
     }
-
     enable();
+}
+
+function swap(arr, ind1, ind2) {
+    //Creates the temp values for swapping
+    let tempHeight = arr[ind1].style.height;
+    let tempColor = arr[ind1].style.backgroundColor;
+    let tempVal = arr[ind1].childNodes[0].innerText;
+
+    //loads ind1 with data from ind2
+    arr[ind1].style.height = arr[ind2].style.height;
+    arr[ind1].style.backgroundColor = arr[ind2].style.backgroundColor;
+    arr[ind1].childNodes[0].innerText = arr[ind2].childNodes[0].innerText;
+
+    //loads ind2 with the data originally from ind1
+    arr[ind2].style.height = tempHeight;
+    arr[ind2].style.backgroundColor = tempColor;
+    arr[ind2].childNodes[0].innerText = tempVal;
+}
+
+function generateBars(num = ARR_SIZE) {
+    clearBars();
+    for(let i = 0; i < num; i++) {
+        const value = Math.floor(Math.random() * (ARR_SIZE * 5)) + 1;
+        const container = document.getElementById("sorting-container");
+
+        const bar = document.createElement("div");
+        bar.classList.add("bar");
+        bar.style.height = (value * 3) + 'px';
+        bar.style.transform = 'translateX(' + (i * 30) + 'px)';
+        const barLabel = document.createElement("label");
+        barLabel.classList.add("bar_id");
+        barLabel.innerHTML = value;
+        bar.appendChild(barLabel);
+        container.appendChild(bar);
+    }
 }
 
 function clearBars() {
@@ -129,19 +127,15 @@ function sortArray() {
     switch(sortAlgo) {
         case "merge":
             mergeSort();
-            disable();
             break;
         case "insertion":
             insertionSort();
-            disable();
             break;
         case "quick":
             quicksort();
-            disable();
             break;
         case "selection":
             selectionSort();
-            disable();
             break;
         default:
             alert("Please select a sorting algorithm");
@@ -150,20 +144,20 @@ function sortArray() {
 }
 
 function disable() {
-  // To disable the button "Generate New Array"
-  document.getElementById("new-array-btn").disabled = true;
-  document.getElementById("new-array-btn").style.backgroundColor = "#d8b6ff";
-  
-  // To disable the button "Selection Sort"
-  document.getElementById("sort-btn").disabled = true;
-  document.getElementById("sort-btn").style.backgroundColor = "#d8b6ff";
+    // To disable the button "Generate New Array"
+    document.getElementById("new-array-btn").disabled = true;
+    document.getElementById("new-array-btn").style.backgroundColor = "#d8b6ff";
+
+    // To disable the button "Selection Sort"
+    document.getElementById("sort-btn").disabled = true;
+    document.getElementById("sort-btn").style.backgroundColor = "#d8b6ff";
 }
 
 function enable() {
     // To enable the button "Generate New Array" after final(sorted)
     document.getElementById("new-array-btn").disabled = false;
     document.getElementById("new-array-btn").style.backgroundColor = "#6f459e";
-    
+
     // To enable the button "Selection Sort" after final(sorted)
     document.getElementById("sort-btn").disabled = false;
     document.getElementById("sort-btn").style.backgroundColor = "#6f459e";

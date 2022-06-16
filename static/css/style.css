@@ -254,7 +254,7 @@ body.sorting {
     display: inline-block;
     width: 100%;
     height: 100%;
-    margin-top: 3.1em;
+    margin-top: 8.7em;
 }
 
 .sorting-container {
@@ -281,10 +281,9 @@ body.sorting {
     position: absolute;
     display: none;
     width: 100%;
-    background-color: #aeb3b6;
+    /* background-color: #aeb3b6; */
     height: 76px;
     bottom: 0;
-    margin-bottom: 90px;
     text-align: center;
     justify-content: space-between;
 }
@@ -301,15 +300,17 @@ body.sorting {
     height: 30px;
     width: 60px;
     border-style: groove;
+    border-radius: 6px;
     border-color: #9a9a9a;
+    background-color: #aeb3b6;
 }
 
 .input-container {
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    top: 0;
     width: 100%;
-    background-color: #454749;
-    margin: 0 auto;
+    background-color: #1c2936;
+    margin-top: 3.1em;
 }
 
 .sort-inputs {
@@ -328,11 +329,17 @@ body.sorting {
 .sort-btn {
     padding: 12px;
     font-weight: bolder;
-    background-color: #6f459e;
+    background-color: #17c490;
     border-radius: 10px;
-    color: white;
+    color: #ffffff;
     font-size: 16px;
-    border: white;
+    border: #ffffff;
+    cursor: pointer;
+}
+
+.sort-btn:active {
+    background-color: #27775f;
+    color: #e2e2e2;
 }
 
 .sort-inputs:not(.sort-label) {

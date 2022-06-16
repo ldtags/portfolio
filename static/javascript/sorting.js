@@ -6,8 +6,44 @@ let testArray = Array.from({length: 40}, () => Math.floor(Math.random() * 40));
 //timeout is necessary because js will attempt to load the bars before the HTML is actually loaded
 //so method calls (maybe only ones that affect the html?) require the timeout
 window.onload = setTimeout(() => {
-                    generateBars();
+                    // generateBars();
                 }, 50);
+
+
+async function quicksort() {
+    let bars = document.querySelectorAll(".bar");
+    quicksortRec(bars, 0, bars.length-1);
+    enable();
+}
+
+async function quicksortRec(bars, min, max) {
+    if(min >= max) {  return;  }
+
+    let pivot = parseInt(bars[max].childNodes[0].innerHTML);
+    bars[max].style.backgroundColor = "red";
+    let i = min - 1;
+    for(let j = min; j <= max; j++) {
+        if(parseInt(bars[j].childNodes[0].innerHTML) < pivot) {
+            i++;
+            await new Promise((resolve) =>
+                    setTimeout(() => {
+                        resolve();
+                }, ANIMATION_SPEED)
+            );
+            swap(bars, i, j);
+        }
+    }
+    await new Promise((resolve) =>
+            setTimeout(() => {
+                resolve();
+        }, ANIMATION_SPEED)
+    );
+    swap(bars, i+1, max);
+    let pI = i+1;
+    quicksortRec(bars, min, pI-1);
+    bars[pI].style.backgroundColor = " rgb(49, 226, 13)";
+    quicksortRec(bars, pI+1, max);
+}
 
 
 async function countingSort() {
@@ -263,46 +299,57 @@ function clearBars() {
 
 
 function sortArray() {
-    switch(sortAlgo) {
-        case "merge":
-            mergeSort();
-            break;
-        case "insertion":
-            insertionSort();
-            break;
-        case "quick":
-            quicksort();
-            break;
-        case "selection":
-            selectionSort();
-            break;
-        case "counting":
-            countingSort();
-            break;
-        default:
-            alert("Please select a sorting algorithm");
-            break;
+    const bars = document.querySelectorAll(".bar");
+    if(!bars[5]) {
+        alert("Please generate an array");
+        enable();
+    } else {
+        switch(sortAlgo) {
+            case "merge":
+                mergeSort();
+                break;
+            case "insertion":
+                insertionSort();
+                break;
+            case "quick":
+                quicksort();
+                break;
+            case "selection":
+                selectionSort();
+                break;
+            case "counting":
+                countingSort();
+                break;
+            default:
+                alert("Please select a sorting algorithm");
+                enable();
+                break;
+        }
     }
 }
 
 function disable() {
     // To disable the button "Generate New Array"
     document.getElementById("new-array-btn").disabled = true;
-    document.getElementById("new-array-btn").style.backgroundColor = "#d8b6ff";
+    document.getElementById("new-array-btn").style.cursor = 'auto';
+    document.getElementById("new-array-btn").style.backgroundColor = "#77ecc9";
 
     // To disable the button "Selection Sort"
     document.getElementById("sort-btn").disabled = true;
-    document.getElementById("sort-btn").style.backgroundColor = "#d8b6ff";
+    document.getElementById("sort-btn").style.cursor = 'auto';
+    document.getElementById("sort-btn").style.backgroundColor = "#77ecc9";
 }
 
 function enable() {
     // To enable the button "Generate New Array" after final(sorted)
     document.getElementById("new-array-btn").disabled = false;
-    document.getElementById("new-array-btn").style.backgroundColor = "#6f459e";
+    document.getElementById("new-array-btn").style.cursor = 'pointer';
+    document.getElementById("new-array-btn").style.backgroundColor = "#17c490";
 
     // To enable the button "Selection Sort" after final(sorted)
     document.getElementById("sort-btn").disabled = false;
-    document.getElementById("sort-btn").style.backgroundColor = "#6f459e";
+    document.getElementById("sort-btn").style.cursor = 'pointer';
+    document.getElementById("sort-btn").style.backgroundColor = "#17c490";
 }
 
 function setMerge() {
@@ -377,4 +424,10 @@ function compareArrays(unsorted, sorted) {
 
 function generateTestArray(length) {
     return Array.from({length: length}, () => Math.floor(Math.random() * length));
+}
+
+function tempSwap(arr, ind1, ind2) {
+    let temp = arr[ind1];
+    arr[ind1] = arr[ind2];
+    arr[ind2] = temp;
 }

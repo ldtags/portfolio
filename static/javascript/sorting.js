@@ -1,10 +1,14 @@
 let sortAlgo = '';
 let ARR_SIZE = 20;
 let ANIMATION_SPEED = 30;
+let testArray = Array.from({length: 40}, () => Math.floor(Math.random() * 40));
 
+//timeout is necessary because js will attempt to load the bars before the HTML is actually loaded
+//so method calls (maybe only ones that affect the html?) require the timeout
 window.onload = setTimeout(() => {
                     generateBars();
                 }, 50);
+
 
 async function insertionSort() {
     let bars = document.querySelectorAll(".bar");
@@ -80,6 +84,56 @@ async function selectionSort() {
     enable();
 }
 
+async function mergeSort() {
+    let bars = document.querySelectorAll(".bar");
+    let min = 0, max = bars.length-1;
+    mergeSortRecursion(bars, min, max);
+    enable();
+}
+
+async function mergeSortRecursion(bars, min, max) {
+    if(min >= max)
+        return;
+
+    let mid = parseInt(min +(max-min)/2);
+    mergeSortRecursion(bars, min, mid);
+    mergeSortRecursion(bars, mid + 1, max);
+    merge(bars, min, mid, max);
+}
+
+function merge(bars, min, mid, max) {
+    let left = [], right = [];
+    for(let i = 0; i < mid - min + 1; i++) {
+        left[i] = bars[min + i];
+    }
+    for(let i = 0; i < max - mid; i++) {
+        right[i] = bars[i + mid + 1];
+    }
+
+    let l = 0, r = 0, i = min;
+    while(l < left.length && r < right.length) {
+        if(parseInt(left[l].childNodes[0].innerHTML) < parseInt(right[r].childNodes[0].innerHTML)) {
+            bars[i].childNodes[0].innerHTML = left[l].childNodes[0].innerHTML;
+            l++;
+        } else {
+            bars[i].childNodes[0].innerHTML = right[r].childNodes[0].innerHTML;
+            r++;
+        }
+        i++;
+    }
+
+    while(l < left.length) {
+        bars[i].childNodes[0].innerHTML = left[l].childNodes[0].innerHTML;
+        i++;
+        l++;
+    }
+    while(r < right.length) {
+        bars[i].childNodes[0].innerHTML = right[r].childNodes[0].innerHTML;
+        i++;
+        r++;
+    }
+}
+
 function swap(arr, ind1, ind2) {
     //Creates the temp values for swapping
     let tempHeight = arr[ind1].style.height;
@@ -137,6 +191,9 @@ function sortArray() {
         case "selection":
             selectionSort();
             break;
+        case "counting":
+            countingSort();
+            break;
         default:
             alert("Please select a sorting algorithm");
             break;
@@ -179,6 +236,10 @@ function setSelection() {
     sortAlgo = "selection";
 }
 
+function setCounting() {
+    sortAlgo = "counting";
+}
+
 function setSize(size) {
     ARR_SIZE = size;
 }
@@ -187,10 +248,48 @@ function setSpeed(milliseconds) {
     ANIMATION_SPEED = milliseconds;
 }
 
-function printArray(arr) { 
+function printBarVals() { 
+    let arr = document.querySelectorAll(".bar");
     let toPrint = "";
     let i; 
     for (i = 0; i < arr.length; i++) 
         toPrint += arr[i].childNodes[0].innerHTML + " ";
-    alert(toPrint);
+    console.log(toPrint);
 } 
+
+function printArray(arr) {
+    let toPrint = "";
+    for(let i = 0; i < arr.length; i++) {
+        toPrint += arr[i] + " ";
+    }
+    console.log(toPrint);
+}
+
+function copyToArray(origin, copy) {
+    if(copy.length < origin.length)
+        return;
+    for(let i = 0; i < origin.length; i++) {
+        copy[i] = origin[i];
+    }
+}
+
+function compareArrays(unsorted, sorted) {
+    //O(n) time complexity non-unique array matching
+    //checks if each array has equal occurances of each value
+    if(unsorted.length != sorted.length) return false;
+    let counter = new Array(unsorted.length).fill(0);
+    for(let i = 0; i < unsorted.length; i++) {
+        counter[unsorted[i]]++;
+    }
+    for(let i = 0; i < sorted.length; i++) {
+        counter[sorted[i]]--;
+    }
+    for(let i = 0; i < counter.length; i++) {
+        if(counter[i] != 0) return false;
+    }
+    return true;
+}
+
+function generateTestArray(length) {
+    return Array.from({length: length}, () => Math.floor(Math.random() * length));
+}

@@ -1,5 +1,5 @@
 let sortAlgo = '';
-let ARR_SIZE = 20;
+let ARR_SIZE = window.innerWidth / 30;
 let ANIMATION_SPEED = 30;
 let testArray = Array.from({length: 40}, () => Math.floor(Math.random() * 40));
 
@@ -9,6 +9,67 @@ window.onload = setTimeout(() => {
                     generateBars();
                 }, 50);
 
+
+async function countingSort() {
+    generateCounter();
+
+    let bars = document.querySelectorAll(".bar");
+    let counter = new Array(parseInt(window.innerHeight / 12) + 2).fill(0);
+    for(let i = 0; i < bars.length; i++) {
+        counter[parseInt(bars[i].childNodes[0].innerHTML)]++;
+        bars[i].style.height = '0px';
+        await new Promise((resolve) =>
+                setTimeout(() => {
+                    resolve();
+            }, ANIMATION_SPEED)
+        );
+        bars[i].childNodes[0].innerHTML = '';
+        renderCount(counter);
+    }
+    let j = 0;
+    for(let i = 0; i < counter.length; i++) {
+        while(counter[i] > 0) {
+            bars[j].childNodes[0].innerHTML = i;
+            await new Promise((resolve) =>
+                setTimeout(() => {
+                    resolve();
+                }, ANIMATION_SPEED)
+            );
+            bars[j].style.height = i * 9 + 'px';
+            bars[j].style.backgroundColor = " rgb(49, 226, 13)";
+
+            j++;
+            counter[i]--;
+            renderCount(counter);
+        }
+    }
+
+    document.getElementById("counter").style.display = 'none';
+    enable();
+}
+
+function renderCount(counter) {
+    clearRender();
+    const sections = document.querySelectorAll(".counter-section");
+    let j = 0;
+    for(let i = 0; i < counter.length; i++) {
+        if(counter[i] != 0 && counter[i]) {
+            const label = document.createElement("label");
+            label.classList.add("counter-label");
+            label.innerHTML = i + ": " + counter[i];
+            sections[j].appendChild(label);
+            j++;
+        }
+    }
+
+}
+
+function clearRender() {
+    const labels = document.querySelectorAll(".counter-label");
+    for(let i = 0; i < labels.length; i++) {
+        labels[i].parentNode.removeChild(labels[i]);
+    }
+}
 
 async function insertionSort() {
     let bars = document.querySelectorAll(".bar");
@@ -50,7 +111,7 @@ async function selectionSort() {
             await new Promise((resolve) =>
                 setTimeout(() => {
                     resolve();
-                }, ANIMATION_SPEED)
+                }, ANIMATION_SPEED / 6)
             );
 
             let minVal = parseInt(bars[min].childNodes[0].innerHTML);
@@ -72,7 +133,7 @@ async function selectionSort() {
         await new Promise((resolve) =>
             setTimeout(() => {
                 resolve();
-            }, ANIMATION_SPEED)
+            }, ANIMATION_SPEED * 2)
         );
 
         // Provide skyblue color to the (min-idx)th bar
@@ -154,12 +215,12 @@ function swap(arr, ind1, ind2) {
 function generateBars(num = ARR_SIZE) {
     clearBars();
     for(let i = 0; i < num; i++) {
-        const value = Math.floor(Math.random() * (ARR_SIZE * 5)) + 1;
+        const value = Math.floor(Math.random() * (window.innerHeight / 12)) + 1;
         const container = document.getElementById("sorting-container");
 
         const bar = document.createElement("div");
         bar.classList.add("bar");
-        bar.style.height = (value * 3) + 'px';
+        bar.style.height = (value * 9) + 'px';
         bar.style.transform = 'translateX(' + (i * 30) + 'px)';
         const barLabel = document.createElement("label");
         barLabel.classList.add("bar_id");
@@ -167,6 +228,30 @@ function generateBars(num = ARR_SIZE) {
         bar.appendChild(barLabel);
         container.appendChild(bar);
     }
+}
+
+function generateCounter(num = ARR_SIZE) {
+    clearCounter();
+    const counter = document.getElementById("counter");
+    counter.style.display = 'inline-block';
+    for(let i = 0; i < num; i++) {
+        const section = document.createElement("div");
+        section.classList.add("counter-section");
+        counter.appendChild(section);
+    }
+}
+
+function clearCounter() {
+    let sections = document.querySelectorAll(".counter-section");
+    for(let i = 0; i < sections.length; i++) {
+        sections[i].parentNode.removeChild(sections[i]);
+    }
+}
+
+function removeCounter() {
+    clearCounter();
+    const counter = document.getElementById("counter");
+    counter.style.display = 'none';
 }
 
 function clearBars() {
@@ -254,7 +339,7 @@ function printBarVals() {
     let i; 
     for (i = 0; i < arr.length; i++) 
         toPrint += arr[i].childNodes[0].innerHTML + " ";
-    console.log(toPrint);
+    alert(toPrint);
 } 
 
 function printArray(arr) {

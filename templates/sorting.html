@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html class="sorting">
     {% include "format/header.html" %}
 
-    <body>
+    <body class="sorting">
         <script src="../static/javascript/sorting.js"></script>
-        <div class="sorting-container" id="sorting-container"></div>
-
-        <div class="input-container">
-            <div class="sort-inputs">
-                <button class="sort-btn" onclick="generateBars()" id="new-array-btn">Generate New Array</button>
-                <select name="sort-list" id="sort-list" size="4" multiple="multiple">
-                    <option value="merge" onclick="setCounting()"> Counting Sort </option>
-                    <option value="insertion" onclick="setInsertion()"> Insertion Sort </option>
-                    <option value="quick" onclick="setQuick()"> Quicksort </option>
-                    <option value="selection" onclick="setSelection()"> Selection Sort </option>
-                </select>
-                <button class="sort-btn" onclick="disable(), sortArray()" id="sort-btn">Sort Array</button>
+        <div class="sort-page-container">
+            <div class="sorting-container" id="sorting-container"></div>
+            <div class="counter" id="counter"></div>
+            <div class="input-container">
+                <div class="sort-inputs">
+                    <button class="sort-btn" onclick="generateBars()" id="new-array-btn">Generate New Array</button>
+                    <select name="sort-list" id="sort-list" size="4" multiple="multiple" class="sort-options">
+                        <option value="merge" onclick="setCounting()"> Counting Sort </option>
+                        <option value="insertion" onclick="setInsertion()"> Insertion Sort </option>
+                        <option value="quick" onclick="setQuick()"> Quicksort </option>
+                        <option value="selection" onclick="setSelection()"> Selection Sort </option>
+                    </select>
+                    <button class="sort-btn" onclick="disable(), sortArray()" id="sort-btn">Sort Array</button>
+                </div>
             </div>
         </div>
     </body>

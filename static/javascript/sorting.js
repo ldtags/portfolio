@@ -62,9 +62,10 @@ async function countingSort() {
         bars[i].childNodes[0].innerHTML = '';
         renderCount(counter);
     }
-    let j = 0;
-    for(let i = 0; i < counter.length; i++) {
-        while(counter[i] > 0) {
+
+    let j = 0, i = 0;
+    while(i < counter.length) {
+        if(counter[i] > 0) {
             bars[j].childNodes[0].innerHTML = i;
             await new Promise((resolve) =>
                 setTimeout(() => {
@@ -77,6 +78,8 @@ async function countingSort() {
             j++;
             counter[i]--;
             renderCount(counter);
+        } else {
+            i++;
         }
     }
 

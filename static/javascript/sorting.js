@@ -1,19 +1,24 @@
 let sortAlgo = '';
 let ARR_SIZE = window.innerWidth / 30;
 let ANIMATION_SPEED = 30;
-let testArray = Array.from({length: 40}, () => Math.floor(Math.random() * 40));
 
 //timeout is necessary because js will attempt to load the bars before the HTML is actually loaded
 //so method calls (maybe only ones that affect the html?) require the timeout
 window.onload = setTimeout(() => {
-                    // generateBars();
+                    generateBars();
                 }, 50);
 
 
-async function quicksort() {
+function quicksort() {
     let bars = document.querySelectorAll(".bar");
-    quicksortRec(bars, 0, bars.length-1);
-    enable();
+    quicksortStart(bars).then(enable);
+}
+
+function quicksortStart(bars) {
+    return new Promise(function(resolve) {
+        quicksortRec(bars, 0, bars.length-1);
+        resolve();
+    }, 2000);
 }
 
 async function quicksortRec(bars, min, max) {
@@ -33,6 +38,7 @@ async function quicksortRec(bars, min, max) {
             swap(bars, i, j);
         }
     }
+    
     await new Promise((resolve) =>
             setTimeout(() => {
                 resolve();
@@ -316,6 +322,7 @@ function sortArray() {
                 break;
             case "quick":
                 quicksort();
+                checkArray();
                 break;
             case "selection":
                 selectionSort();
@@ -423,6 +430,18 @@ function compareArrays(unsorted, sorted) {
         if(counter[i] != 0) return false;
     }
     return true;
+}
+
+async function checkArray() {
+    let bars = document.querySelectorAll(".bar");
+    return new Promise(function(resolve) {
+        setTimeout(function() {
+            for(let i = 0; i < bars.length; i++) {
+                bars[i].style.backgroundColor = " rgb(49, 226, 13)";
+            }
+            resolve();
+        }, 4000);
+    })
 }
 
 function generateTestArray(length) {

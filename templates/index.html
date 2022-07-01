@@ -4,7 +4,13 @@
     {% include "format/header.html" %}
 
     <body>
-        <script src="../static/javascript/footer.js"></script>
+        <script type="text/javascript" src="../static/javascript/footer.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script type="text/javascript">
+            (function(){
+               emailjs.init("3p-bi8k1ve2ape4R7");
+            })();
+         </script>
 
         <div class="sunset">
             <div class="sunset-content">
@@ -40,6 +46,16 @@
         <footer class="footer">
             <div class="footer-content">
                 <button class="email-btn" id="email-btn">email me</button>
+                <form id="contact-form">
+                    <input type="hidden" name="contact_number">
+                    <label>Name</label>
+                    <input type="text" name="user_name">
+                    <label>Email</label>
+                    <input type="email" name="user_email">
+                    <label>Message</label>
+                    <textarea name="message"></textarea>
+                    <input type="submit" value="Send">
+                </form>
             </div>
         </footer>
     </body>

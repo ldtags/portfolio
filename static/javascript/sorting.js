@@ -342,24 +342,24 @@ function disable() {
     // To disable the button "Generate New Array"
     document.getElementById("new-array-btn").disabled = true;
     document.getElementById("new-array-btn").style.cursor = 'auto';
-    document.getElementById("new-array-btn").style.backgroundColor = "#77ecc9";
+    document.getElementById("new-array-btn").style.backgroundColor = "#5a7dc5";
 
     // To disable the button "Selection Sort"
     document.getElementById("sort-btn").disabled = true;
     document.getElementById("sort-btn").style.cursor = 'auto';
-    document.getElementById("sort-btn").style.backgroundColor = "#77ecc9";
+    document.getElementById("sort-btn").style.backgroundColor = "#5a7dc5";
 }
 
 function enable() {
     // To enable the button "Generate New Array" after final(sorted)
     document.getElementById("new-array-btn").disabled = false;
     document.getElementById("new-array-btn").style.cursor = 'pointer';
-    document.getElementById("new-array-btn").style.backgroundColor = "#17c490";
+    document.getElementById("new-array-btn").style.backgroundColor = "#315397";
 
     // To enable the button "Selection Sort" after final(sorted)
     document.getElementById("sort-btn").disabled = false;
     document.getElementById("sort-btn").style.cursor = 'pointer';
-    document.getElementById("sort-btn").style.backgroundColor = "#17c490";
+    document.getElementById("sort-btn").style.backgroundColor = "#315397";
 }
 
 function setMerge() {

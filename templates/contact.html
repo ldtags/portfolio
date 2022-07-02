@@ -7,9 +7,6 @@
         <div class="contact-container">
             <form id="contact-form" class="contact-form">
                 <div class="form-content">
-                    <div class="contact-form-header">
-                        <h1>Email  Me</h1>
-                    </div>
                     <div class="contact-input name">
                         <label>Name</label><br>
                         <input type="text" name="user_name" placeholder="Enter name">
@@ -22,9 +19,12 @@
                         <label>Message</label><br>
                         <textarea name="text" class="message"></textarea>
                     </div>
+                    <br>
                     <div class="submit">
                         <input type="submit" value="Send" name="send" class="contact-btn">
                     </div>
+                    <br>
+                    <br>
                     <div class="socials">
                         <a href="https://github.com/ldtags">
                             <img 
@@ -41,32 +41,28 @@
                             >
                         </a>
                     </div>
-                </div>
-                <div class="powered-by flex-center">
-                    <p>Powered by <a href="https://postmail.invotes.com" target="_blank">PostMail</a></p>
+                    <div class="powered-by flex-center">
+                        <p>Powered by <a href="https://postmail.invotes.com" target="_blank">PostMail</a></p>
+                    </div>
                 </div>
             </form>
 
             <script>
                 var form_id = "contact-form";
 
-                var TEMP_COUNTER = 0;
+                var sendButton = $("#" + form_id + " .submit [name='send']");
 
                 var data = {
                     "access_token": "0dc241fglossr33qk3xtc2ef"
                 };
 
                 function onSuccess() {
-                    // remove this to avoid redirect
                     window.location = window.location.pathname + "?message=Email+Successfully+Sent%21&isError=0";
                 }
 
                 function onError(error) {
-                    // remove this to avoid redirect
                     window.location = window.location.pathname + "?message=Email+could+not+be+sent.&isError=1";
                 }
-
-                var sendButton = $("#" + form_id + " .submit [name='send']");
 
                 function send() {
                     sendButton.val('Sending…');

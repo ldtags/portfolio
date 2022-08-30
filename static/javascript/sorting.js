@@ -106,7 +106,6 @@ function renderCount(counter) {
             j++;
         }
     }
-
 }
 
 function clearRender() {
@@ -417,7 +416,7 @@ function copyToArray(origin, copy) {
 
 function compareArrays(unsorted, sorted) {
     //O(n) time complexity non-unique array matching
-    //checks if each array has equal occurances of each value
+    //checks if both arrays have equal occurances of each value
     if(unsorted.length != sorted.length) return false;
     let counter = new Array(unsorted.length).fill(0);
     for(let i = 0; i < unsorted.length; i++) {

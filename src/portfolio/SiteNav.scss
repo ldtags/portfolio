@@ -1,0 +1,26 @@
+.site-nav {
+  font-family: 'Overlock', Arial, Helvetica, sans-serif;
+}
+
+.navbar-brand {
+  align-self: center;
+}
+
+.navbar-brand .d-flex {
+  gap: 7px
+}
+
+.navbar-nav {
+  gap: 15px;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.pointer {
+  cursor: pointer;
+}

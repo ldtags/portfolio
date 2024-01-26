@@ -1,0 +1,50 @@
+.introduction{
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100vh;
+  width: 100vw;
+  background-color: #171717;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url(../../assets/galaxy.jpg);
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.3;
+  }
+}
+
+.overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: url(../../assets/galaxy-silhouette.png);
+    background-position: center center;
+    background-size: cover;
+    text-align: center;
+    filter: brightness(50%);
+    transform-origin: bottom;
+    pointer-events: none;
+}
+
+.parallax-body {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-cover {
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  bottom: 0 !important;
+  background: #0b0f10;
+}

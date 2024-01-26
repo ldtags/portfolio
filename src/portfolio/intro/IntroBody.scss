@@ -1,0 +1,25 @@
+.container {
+  z-index: 500;
+}
+
+.intro-bio {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.btn-md-lg {
+  --bs-btn-padding-y: 0.4rem;
+  --bs-btn-padding-x: 1rem;
+  --bs-btn-font-size: 1.25rem;
+  --bs-btn-border-radius: var(--bs-border-radius-lg);
+}
+
+hr {
+  color: #ffffff;
+  background-color: #ffffff;
+  border: none;
+  height: 2px;
+}

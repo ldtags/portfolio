@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
-function App() {
+import './App.scss';
+import Layout from './components/Layout';
+import Portfolio from './portfolio/Portfolio';
+import NoPage from './components/NoPage'
+
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+		<div className='app'>
+			<ParallaxProvider>
+				<BrowserRouter>
+    		  <Routes>
+    		    <Route path='/' element={<Layout />}>
+    		      <Route index element={<Portfolio />} />
+    		      <Route path='*' element={<NoPage />} />
+    		    </Route>
+    		  </Routes>
+    		</BrowserRouter>
+			</ParallaxProvider>
+		</div>
   );
 }
-
-export default App;
